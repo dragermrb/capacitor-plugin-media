@@ -17,10 +17,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dragermrb/capacitor-plugin-media.git.git"
+    "url": "git+https://github.com/dragermrb/capacitor-plugin-media.git"
   },
   "bugs": {
-    "url": "https://github.com/dragermrb/capacitor-plugin-media.git/issues"
+    "url": "https://github.com/dragermrb/capacitor-plugin-media/issues"
   },
   "keywords": [
     "capacitor",
