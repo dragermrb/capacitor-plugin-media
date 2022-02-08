@@ -1,36 +1,36 @@
 export interface MediaPlugin {
   /**
-   * Get list of user medias. Only for IOS
+   * Get list of user medias. IOS only
    */
   getMedias(options?: MediaFetchOptions): Promise<MediaResponse>;
 
   /**
-   * Get list of user albums
+   * Get list of user albums. IOS and Android Api 29+
    */
   getAlbums(): Promise<MediaAlbumResponse>;
 
   /**
-   * Add image to gallery. Create album if not exists.
+   * Add image to gallery. Creates album if not exists.
    */
   savePhoto(options?: MediaSaveOptions): Promise<PhotoResponse>;
 
   /**
-   * Add video to gallery. Create album if not exists.
+   * Add video to gallery. Creates album if not exists.
    */
   saveVideo(options?: MediaSaveOptions): Promise<PhotoResponse>;
 
   /**
-   * Add gif to gallery. Create album if not exists.
+   * Add gif to gallery. Creates album if not exists.
    */
   saveGif(options?: MediaSaveOptions): Promise<PhotoResponse>;
 
   /**
-   * Add document to gallery. Only for Android. Create album if not exists.
+   * Add document to gallery. Android only. Create album if not exists.
    */
   saveDocument(options?: MediaSaveOptions): Promise<PhotoResponse>;
 
   /**
-   * Create album
+   * Create album. IOS only
    */
   createAlbum(options: MediaAlbumCreate): Promise<MediaAlbum>;
 }
@@ -42,7 +42,7 @@ export interface MediaSaveOptions {
   path: string;
 
   /**
-   * Album to add media. If no 'id' and 'name' not exists, album with name will be created.
+   * Album to add media. If no 'id' and 'name' not exists, album 'name' will be created.
    */
   album?: {
     /**

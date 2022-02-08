@@ -34,7 +34,7 @@ npx cap sync
 getMedias(options?: MediaFetchOptions | undefined) => Promise<MediaResponse>
 ```
 
-Get list of user medias. Only for IOS
+Get list of user medias. IOS only
 
 | Param         | Type                                                            |
 | ------------- | --------------------------------------------------------------- |
@@ -51,7 +51,7 @@ Get list of user medias. Only for IOS
 getAlbums() => Promise<MediaAlbumResponse>
 ```
 
-Get list of user albums
+Get list of user albums. IOS and Android Api 29+
 
 **Returns:** <code>Promise&lt;<a href="#mediaalbumresponse">MediaAlbumResponse</a>&gt;</code>
 
@@ -64,7 +64,7 @@ Get list of user albums
 savePhoto(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
 ```
 
-Add image to gallery. Create album if not exists.
+Add image to gallery. Creates album if not exists.
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -81,7 +81,7 @@ Add image to gallery. Create album if not exists.
 saveVideo(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
 ```
 
-Add video to gallery. Create album if not exists.
+Add video to gallery. Creates album if not exists.
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -98,7 +98,7 @@ Add video to gallery. Create album if not exists.
 saveGif(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
 ```
 
-Add gif to gallery. Create album if not exists.
+Add gif to gallery. Creates album if not exists.
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -115,7 +115,7 @@ Add gif to gallery. Create album if not exists.
 saveDocument(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
 ```
 
-Add document to gallery. Only for Android. Create album if not exists.
+Add document to gallery. Android only. Create album if not exists.
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -132,7 +132,7 @@ Add document to gallery. Only for Android. Create album if not exists.
 createAlbum(options: MediaAlbumCreate) => Promise<MediaAlbum>
 ```
 
-Create album
+Create album. IOS only
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |
@@ -215,10 +215,10 @@ Create album
 
 #### MediaSaveOptions
 
-| Prop        | Type                                         | Description                                                                            |
-| ----------- | -------------------------------------------- | -------------------------------------------------------------------------------------- |
-| **`path`**  | <code>string</code>                          | Path of file to add                                                                    |
-| **`album`** | <code>{ id?: string; name?: string; }</code> | Album to add media. If no 'id' and 'name' not exists, album with name will be created. |
+| Prop        | Type                                         | Description                                                                         |
+| ----------- | -------------------------------------------- | ----------------------------------------------------------------------------------- |
+| **`path`**  | <code>string</code>                          | Path of file to add                                                                 |
+| **`album`** | <code>{ id?: string; name?: string; }</code> | Album to add media. If no 'id' and 'name' not exists, album 'name' will be created. |
 
 
 #### MediaAlbumCreate
