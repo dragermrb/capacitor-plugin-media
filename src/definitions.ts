@@ -2,7 +2,7 @@ export interface MediaPlugin {
   /**
    * Get list of user medias. IOS only
    */
-  getMedias(options?: MediaFetchOptions): Promise<MediaResponse>;
+  getMedias(options?: MediaFetchOptions): Promise<MediasResponse>;
 
   /**
    * Get list of user albums. IOS and Android Api 29+
@@ -12,22 +12,22 @@ export interface MediaPlugin {
   /**
    * Add image to gallery. Creates album if not exists.
    */
-  savePhoto(options?: MediaSaveOptions): Promise<PhotoResponse>;
+  savePhoto(options?: MediaSaveOptions): Promise<MediaResponse>;
 
   /**
    * Add video to gallery. Creates album if not exists.
    */
-  saveVideo(options?: MediaSaveOptions): Promise<PhotoResponse>;
+  saveVideo(options?: MediaSaveOptions): Promise<MediaResponse>;
 
   /**
    * Add gif to gallery. Creates album if not exists.
    */
-  saveGif(options?: MediaSaveOptions): Promise<PhotoResponse>;
+  saveGif(options?: MediaSaveOptions): Promise<MediaResponse>;
 
   /**
    * Add document to gallery. Android only. Create album if not exists.
    */
-  saveDocument(options?: MediaSaveOptions): Promise<PhotoResponse>;
+  saveDocument(options?: MediaSaveOptions): Promise<MediaResponse>;
 
   /**
    * Create album. IOS only
@@ -89,7 +89,7 @@ export interface MediaFetchOptions {
   albumIdentifier?: string;
 }
 
-export interface MediaResponse {
+export interface MediasResponse {
   medias: MediaAsset[];
 }
 
@@ -210,9 +210,14 @@ export interface MediaAlbumCreate {
   name: string;
 }
 
-export interface PhotoResponse {
+export interface MediaResponse {
   /**
    * Media path
    */
-  filePath: string;
+  path: string;
+
+  /**
+   * Media name
+   */
+  name: string;
 }

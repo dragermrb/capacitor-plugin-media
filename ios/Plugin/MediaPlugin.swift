@@ -91,7 +91,8 @@ public class MediaPlugin: CAPPlugin {
                 albumId: album["id"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in
@@ -105,7 +106,8 @@ public class MediaPlugin: CAPPlugin {
                 albumName: album["name"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in
@@ -142,7 +144,8 @@ public class MediaPlugin: CAPPlugin {
                 albumId: album["id"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in
@@ -156,7 +159,8 @@ public class MediaPlugin: CAPPlugin {
                 albumName: album["name"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in
@@ -193,7 +197,8 @@ public class MediaPlugin: CAPPlugin {
                 albumId: album["id"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in
@@ -207,7 +212,8 @@ public class MediaPlugin: CAPPlugin {
                 albumName: album["name"] as! String,
                 successHandler: { (fullPath: String) in
                     call.resolve([
-                        "filePath": fullPath,
+                        "path": fullPath,
+                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
                     ])
                 },
                 failHandler: { (errorMsg: String) in

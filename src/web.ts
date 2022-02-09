@@ -6,32 +6,32 @@ import type {
   MediaAlbumResponse,
   MediaFetchOptions,
   MediaPlugin,
-  MediaResponse,
+  MediasResponse,
   MediaSaveOptions,
-  PhotoResponse,
+  MediaResponse,
 } from './definitions';
 
 export class MediaWeb extends WebPlugin implements MediaPlugin {
-  getMedias(options?: MediaFetchOptions): Promise<MediaResponse> {
+  getMedias(options?: MediaFetchOptions): Promise<MediasResponse> {
     console.log('getMedias', options);
     throw this.unimplemented('Not implemented on web.');
   }
   getAlbums(): Promise<MediaAlbumResponse> {
     throw this.unimplemented('Not implemented on web.');
   }
-  savePhoto(options?: MediaSaveOptions): Promise<PhotoResponse> {
+  savePhoto(options?: MediaSaveOptions): Promise<MediaResponse> {
     console.log('savePhoto', options);
     throw this.unimplemented('Not implemented on web.');
   }
-  saveVideo(options?: MediaSaveOptions): Promise<PhotoResponse> {
+  saveVideo(options?: MediaSaveOptions): Promise<MediaResponse> {
     console.log('saveVideo', options);
     throw this.unimplemented('Not implemented on web.');
   }
-  saveGif(options?: MediaSaveOptions): Promise<PhotoResponse> {
+  saveGif(options?: MediaSaveOptions): Promise<MediaResponse> {
     console.log('saveGif', options);
     throw this.unimplemented('Not implemented on web.');
   }
-  saveDocument(options?: MediaSaveOptions): Promise<PhotoResponse> {
+  saveDocument(options?: MediaSaveOptions): Promise<MediaResponse> {
     console.log('saveDocument', options);
     throw this.unimplemented('Not implemented on web.');
   }

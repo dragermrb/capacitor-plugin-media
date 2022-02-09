@@ -60,7 +60,7 @@ public class Media {
         return albums;
     }
 
-    public String saveMedia(@NonNull Context context, String inputPath, String albumName, String destination) {
+    public JSObject saveMedia(@NonNull Context context, String inputPath, String albumName, String destination) {
         Long size = (new File(inputPath)).length();
         String mimeType = this.getMimeType(inputPath);
 
@@ -91,12 +91,37 @@ public class Media {
                 resolver.update(mediaContentUri, newMediaDetails, null, null);
             }
 
-            return mediaContentUri.toString();
+            JSObject result = new JSObject();
+            result.put("path", mediaContentUri.toString());
+            result.put("name", this.getFileName(context, mediaContentUri));
+
+            return result;
+
         } catch (Exception e) {
             resolver.delete(mediaContentUri, null, null);
 
             throw e;
         }
+    }
+
+    private String getFileName(Context context, Uri uri) throws RuntimeException {
+        String fileName = null;
+
+        if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
+            try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
+                if (cursor != null && cursor.moveToFirst()) {
+                    fileName = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
+                }
+            }
+        } else if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
+            fileName = uri.getLastPathSegment();
+        }
+
+        if (fileName == null){
+            throw new RuntimeException("Cannot get filename from Uri");
+        }
+
+        return fileName;
     }
 
     public String createAlbum(String albumName) throws RuntimeException {

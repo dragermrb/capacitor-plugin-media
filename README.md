@@ -31,7 +31,7 @@ npx cap sync
 ### getMedias(...)
 
 ```typescript
-getMedias(options?: MediaFetchOptions | undefined) => Promise<MediaResponse>
+getMedias(options?: MediaFetchOptions | undefined) => Promise<MediasResponse>
 ```
 
 Get list of user medias. IOS only
@@ -40,7 +40,7 @@ Get list of user medias. IOS only
 | ------------- | --------------------------------------------------------------- |
 | **`options`** | <code><a href="#mediafetchoptions">MediaFetchOptions</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#mediasresponse">MediasResponse</a>&gt;</code>
 
 --------------------
 
@@ -61,7 +61,7 @@ Get list of user albums. IOS and Android Api 29+
 ### savePhoto(...)
 
 ```typescript
-savePhoto(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
+savePhoto(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
 ```
 
 Add image to gallery. Creates album if not exists.
@@ -70,7 +70,7 @@ Add image to gallery. Creates album if not exists.
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#mediasaveoptions">MediaSaveOptions</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#photoresponse">PhotoResponse</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
 --------------------
 
@@ -78,7 +78,7 @@ Add image to gallery. Creates album if not exists.
 ### saveVideo(...)
 
 ```typescript
-saveVideo(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
+saveVideo(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
 ```
 
 Add video to gallery. Creates album if not exists.
@@ -87,7 +87,7 @@ Add video to gallery. Creates album if not exists.
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#mediasaveoptions">MediaSaveOptions</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#photoresponse">PhotoResponse</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
 --------------------
 
@@ -95,7 +95,7 @@ Add video to gallery. Creates album if not exists.
 ### saveGif(...)
 
 ```typescript
-saveGif(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
+saveGif(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
 ```
 
 Add gif to gallery. Creates album if not exists.
@@ -104,7 +104,7 @@ Add gif to gallery. Creates album if not exists.
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#mediasaveoptions">MediaSaveOptions</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#photoresponse">PhotoResponse</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
 --------------------
 
@@ -112,7 +112,7 @@ Add gif to gallery. Creates album if not exists.
 ### saveDocument(...)
 
 ```typescript
-saveDocument(options?: MediaSaveOptions | undefined) => Promise<PhotoResponse>
+saveDocument(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
 ```
 
 Add document to gallery. Android only. Create album if not exists.
@@ -121,7 +121,7 @@ Add document to gallery. Android only. Create album if not exists.
 | ------------- | ------------------------------------------------------------- |
 | **`options`** | <code><a href="#mediasaveoptions">MediaSaveOptions</a></code> |
 
-**Returns:** <code>Promise&lt;<a href="#photoresponse">PhotoResponse</a>&gt;</code>
+**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
 --------------------
 
@@ -146,7 +146,7 @@ Create album. IOS only
 ### Interfaces
 
 
-#### MediaResponse
+#### MediasResponse
 
 | Prop         | Type                      |
 | ------------ | ------------------------- |
@@ -206,11 +206,12 @@ Create album. IOS only
 | **`type`**       | <code><a href="#mediaalbumtype">MediaAlbumType</a></code> | Album type                         |
 
 
-#### PhotoResponse
+#### MediaResponse
 
-| Prop           | Type                | Description |
-| -------------- | ------------------- | ----------- |
-| **`filePath`** | <code>string</code> | Media path  |
+| Prop       | Type                | Description |
+| ---------- | ------------------- | ----------- |
+| **`path`** | <code>string</code> | Media path  |
+| **`name`** | <code>string</code> | Media name  |
 
 
 #### MediaSaveOptions

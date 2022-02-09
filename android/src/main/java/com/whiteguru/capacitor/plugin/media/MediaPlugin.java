@@ -158,12 +158,9 @@ public class MediaPlugin extends Plugin {
         }
 
         try {
-            String filePath = this.implementation.saveMedia(this.getContext(), inputPath, albumName, destination);
+            JSObject saveMediaResult = this.implementation.saveMedia(this.getContext(), inputPath, albumName, destination);
 
-            JSObject result = new JSObject();
-            result.put("filePath", filePath);
-
-            call.resolve(result);
+            call.resolve(saveMediaResult);
         } catch (Exception e) {
             call.reject("RuntimeException occurred", e);
         }
