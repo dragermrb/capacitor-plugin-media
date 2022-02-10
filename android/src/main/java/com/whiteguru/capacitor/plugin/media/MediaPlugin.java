@@ -15,13 +15,13 @@ import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
 
 @CapacitorPlugin(
-        name = "Media",
-        permissions = {
-                @Permission(
-                        strings = {Manifest.permission.READ_EXTERNAL_STORAGE},
-                        alias = "publicStorage"
-                )
-        }
+    name = "Media",
+    permissions = {
+        @Permission(
+            strings = { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE },
+            alias = "publicStorage"
+        )
+    }
 )
 public class MediaPlugin extends Plugin {
 
@@ -37,9 +37,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _getAlbums(call);
         } else {
-            this.bridge.saveCall(call);
-
-            requestAllPermissions(call, "permissionCallback");
+            requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
     }
 
@@ -54,9 +52,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "PICTURES");
         } else {
-            this.bridge.saveCall(call);
-
-            requestAllPermissions(call, "permissionCallback");
+            requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
     }
 
@@ -65,9 +61,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "MOVIES");
         } else {
-            this.bridge.saveCall(call);
-
-            requestAllPermissions(call, "permissionCallback");
+            requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
     }
 
@@ -76,9 +70,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "PICTURES");
         } else {
-            this.bridge.saveCall(call);
-
-            requestAllPermissions(call, "permissionCallback");
+            requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
     }
 
@@ -87,9 +79,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "DOCUMENTS");
         } else {
-            this.bridge.saveCall(call);
-
-            requestAllPermissions(call, "permissionCallback");
+            requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
     }
 
