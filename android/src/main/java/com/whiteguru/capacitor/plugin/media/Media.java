@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
@@ -22,11 +23,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.text.Normalizer;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 public class Media {
+
     private static final String LOG_TAG = "Capacitor/MediaPlugin";
 
     public JSArray getAlbums(Context context) throws RuntimeException {
@@ -37,7 +43,7 @@ public class Media {
         JSArray albums = new JSArray();
         Set<String> bucketIds = new HashSet<>();
 
-        String[] projection = new String[]{MediaStore.MediaColumns.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.BUCKET_ID};
+        String[] projection = new String[] { MediaStore.MediaColumns.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.BUCKET_ID };
         Cursor cur = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
 
         while (cur.moveToNext()) {
@@ -61,6 +67,10 @@ public class Media {
     }
 
     public JSObject saveMedia(@NonNull Context context, String inputPath, String albumName, String destination) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && destination.equals("DOCUMENTS")) {
+            return saveDocumentBelowQ(context, inputPath, albumName);
+        }
+
         Long size = (new File(inputPath)).length();
         String mimeType = this.getMimeType(inputPath);
 
@@ -96,12 +106,106 @@ public class Media {
             result.put("name", this.getFileName(context, mediaContentUri));
 
             return result;
-
         } catch (Exception e) {
             resolver.delete(mediaContentUri, null, null);
 
             throw e;
         }
+    }
+
+    private JSObject saveDocumentBelowQ(Context context, String inputPath, String albumName) {
+        JSObject res;
+        Uri inputUri = Uri.parse(inputPath);
+        File inputFile = new File(inputUri.getPath());
+
+        String albumPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+        File albumDir = new File(albumPath, albumName);
+
+        try {
+            File expFile = copyFile(inputFile, albumDir);
+
+            JSObject result = new JSObject();
+            result.put("path", expFile.toString());
+            result.put("name", this.getFileName(context, inputUri));
+
+            res = result;
+        } catch (Exception e) {
+            throw e;
+        }
+        return res;
+    }
+
+    private File copyFile(File inputFile, File albumDir) {
+        // if destination folder does not exist, create it
+        if (!albumDir.exists()) {
+            if (!albumDir.mkdir()) {
+                throw new RuntimeException("Destination folder does not exist and cannot be created.");
+            }
+        }
+
+        String absolutePath = inputFile.getAbsolutePath();
+        String baseName = inputFile.getName().replaceFirst("[.][^.]+$", "");
+        String extension = absolutePath.substring(absolutePath.lastIndexOf(".") + 1).toLowerCase();
+
+        // generate image file name using current date and time
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmssSSS", Locale.ENGLISH).format(new Date());
+        File newFile = new File(albumDir, toSlug(baseName) + "_" + timeStamp + "." + extension);
+
+        // Read and write image files
+        FileChannel inChannel = null;
+        FileChannel outChannel = null;
+
+        try {
+            inChannel = new FileInputStream(inputFile).getChannel();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Source file not found: " + inputFile + ", error: " + e.getMessage());
+        }
+        try {
+            outChannel = new FileOutputStream(newFile).getChannel();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Copy file not found: " + newFile + ", error: " + e.getMessage());
+        }
+
+        try {
+            inChannel.transferTo(0, inChannel.size(), outChannel);
+        } catch (IOException e) {
+            throw new RuntimeException("Error transfering file, error: " + e.getMessage());
+        } finally {
+            if (inChannel != null) {
+                try {
+                    inChannel.close();
+                } catch (IOException e) {
+                    Logger.debug(LOG_TAG, "Error closing input file channel: " + e.getMessage());
+                    // does not harm, do nothing
+                }
+            }
+            if (outChannel != null) {
+                try {
+                    outChannel.close();
+                } catch (IOException e) {
+                    Logger.debug(LOG_TAG, "Error closing output file channel: " + e.getMessage());
+                    // does not harm, do nothing
+                }
+            }
+        }
+
+        return newFile;
+    }
+
+    private String toSlug(String input) {
+        Pattern NONLATIN = Pattern.compile("[^\\w_-]");
+        Pattern SEPARATORS = Pattern.compile("[\\s\\p{Punct}&&[^-]]");
+
+        String noseparators = SEPARATORS.matcher(input).replaceAll("-");
+        String normalized = Normalizer.normalize(noseparators, Normalizer.Form.NFD);
+        String slug = NONLATIN
+            .matcher(normalized)
+            .replaceAll("")
+            .toLowerCase(Locale.ENGLISH)
+            .replaceAll("-{2,}", "-")
+            .replaceAll("^-|-$", "");
+
+        return slug;
     }
 
     private String getFileName(Context context, Uri uri) throws RuntimeException {
@@ -117,7 +221,7 @@ public class Media {
             fileName = uri.getLastPathSegment();
         }
 
-        if (fileName == null){
+        if (fileName == null) {
             throw new RuntimeException("Cannot get filename from Uri");
         }
 
