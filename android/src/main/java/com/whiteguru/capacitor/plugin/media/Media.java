@@ -47,8 +47,8 @@ public class Media {
         Cursor cur = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
 
         while (cur.moveToNext()) {
-            String albumName = cur.getString((cur.getColumnIndex(MediaStore.MediaColumns.BUCKET_DISPLAY_NAME)));
-            String bucketId = cur.getString((cur.getColumnIndex(MediaStore.MediaColumns.BUCKET_ID)));
+            String albumName = cur.getString((cur.getColumnIndexOrThrow(MediaStore.MediaColumns.BUCKET_DISPLAY_NAME)));
+            String bucketId = cur.getString((cur.getColumnIndexOrThrow(MediaStore.MediaColumns.BUCKET_ID)));
 
             if (!bucketIds.contains(bucketId)) {
                 JSObject album = new JSObject();
@@ -215,7 +215,7 @@ public class Media {
         if (uri.getScheme().equals(ContentResolver.SCHEME_CONTENT)) {
             try (Cursor cursor = context.getContentResolver().query(uri, null, null, null, null)) {
                 if (cursor != null && cursor.moveToFirst()) {
-                    fileName = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
+                    fileName = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME));
                 }
             }
         } else if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
