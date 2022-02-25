@@ -71,6 +71,7 @@ public class Media {
             return saveDocumentBelowQ(context, inputPath, albumName);
         }
 
+        String displayName = Uri.parse(inputPath).getLastPathSegment();
         Long size = (new File(inputPath)).length();
         String mimeType = this.getMimeType(inputPath);
 
@@ -81,7 +82,7 @@ public class Media {
 
         ContentValues newMediaDetails = new ContentValues();
 
-        newMediaDetails.put(MediaStore.MediaColumns.DISPLAY_NAME, inputPath);
+        newMediaDetails.put(MediaStore.MediaColumns.DISPLAY_NAME, displayName);
         newMediaDetails.put(MediaStore.MediaColumns.MIME_TYPE, mimeType);
         newMediaDetails.put(MediaStore.MediaColumns.SIZE, size);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
