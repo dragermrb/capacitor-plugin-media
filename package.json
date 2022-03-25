@@ -1,6 +1,6 @@
 {
   "name": "@whiteguru/capacitor-plugin-media",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Capacitor plugin to handle media files",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
