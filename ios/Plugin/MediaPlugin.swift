@@ -78,47 +78,44 @@ public class MediaPlugin: CAPPlugin {
             return
         }
         
-        checkAuthorization(allowed: {}, notAllowed: {
+        checkAuthorization(allowed: {
+            if (album["id"] != nil) {
+                self.addMediaToAlbumById(
+                    path: path,
+                    albumId: album["id"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            }
+            else if (album["name"] != nil) {
+                self.addMediaToAlbumByName(
+                    path: path,
+                    albumName: album["name"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            } else {
+                call.reject("Album ID or album NAME required")
+                return
+            }
+        }, notAllowed: {
             call.reject("Access to photos not allowed by user")
             return
         })
-        
-        
-        
-        if (album["id"] != nil) {
-            self.addMediaToAlbumById(
-                path: path,
-                albumId: album["id"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        }
-        else if (album["name"] != nil) {
-            self.addMediaToAlbumByName(
-                path: path,
-                albumName: album["name"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        } else {
-            call.reject("Album ID or album NAME required")
-            return
-        }
-        
     }
     
     @objc func saveVideo(_ call: CAPPluginCall) {
@@ -131,47 +128,44 @@ public class MediaPlugin: CAPPlugin {
             return
         }
         
-        checkAuthorization(allowed: {}, notAllowed: {
+        checkAuthorization(allowed: {
+            if (album["id"] != nil) {
+                self.addMediaToAlbumById(
+                    path: path,
+                    albumId: album["id"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            }
+            else if (album["name"] != nil) {
+                self.addMediaToAlbumByName(
+                    path: path,
+                    albumName: album["name"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            } else {
+                call.reject("Album ID or album NAME required")
+                return
+            }
+        }, notAllowed: {
             call.reject("Access to photos not allowed by user")
             return
         })
-        
-        
-        
-        if (album["id"] != nil) {
-            self.addMediaToAlbumById(
-                path: path,
-                albumId: album["id"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        }
-        else if (album["name"] != nil) {
-            self.addMediaToAlbumByName(
-                path: path,
-                albumName: album["name"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        } else {
-            call.reject("Album ID or album NAME required")
-            return
-        }
-        
     }
     
     @objc func saveGif(_ call: CAPPluginCall) {
@@ -184,47 +178,44 @@ public class MediaPlugin: CAPPlugin {
             return
         }
         
-        checkAuthorization(allowed: {}, notAllowed: {
+        checkAuthorization(allowed: {
+            if (album["id"] != nil) {
+                self.addMediaToAlbumById(
+                    path: path,
+                    albumId: album["id"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            }
+            else if (album["name"] != nil) {
+                self.addMediaToAlbumByName(
+                    path: path,
+                    albumName: album["name"] as! String,
+                    successHandler: { (fullPath: String) in
+                        call.resolve([
+                            "path": fullPath,
+                            "name": URL(fileURLWithPath: fullPath).lastPathComponent
+                        ])
+                    },
+                    failHandler: { (errorMsg: String) in
+                        call.reject(errorMsg)
+                    }
+                )
+            } else {
+                call.reject("Album ID or album NAME required")
+                return
+            }
+        }, notAllowed: {
             call.reject("Access to photos not allowed by user")
             return
         })
-        
-        
-        
-        if (album["id"] != nil) {
-            self.addMediaToAlbumById(
-                path: path,
-                albumId: album["id"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        }
-        else if (album["name"] != nil) {
-            self.addMediaToAlbumByName(
-                path: path,
-                albumName: album["name"] as! String,
-                successHandler: { (fullPath: String) in
-                    call.resolve([
-                        "path": fullPath,
-                        "name": URL(fileURLWithPath: fullPath).lastPathComponent
-                    ])
-                },
-                failHandler: { (errorMsg: String) in
-                    call.reject(errorMsg)
-                }
-            )
-        } else {
-            call.reject("Album ID or album NAME required")
-            return
-        }
-        
     }
     
     
