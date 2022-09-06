@@ -9,6 +9,13 @@ npm install @whiteguru/capacitor-plugin-media
 npx cap sync
 ```
 
+### or for Capacitor 3.x
+
+```bash
+npm install @whiteguru/capacitor-plugin-media@3.0.1
+npx cap sync
+```
+
 ## API
 
 <docgen-index>
