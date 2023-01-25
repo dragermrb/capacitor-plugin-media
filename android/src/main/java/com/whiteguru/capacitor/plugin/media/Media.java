@@ -296,6 +296,12 @@ public class Media {
                 } else {
                     return MediaStore.Downloads.EXTERNAL_CONTENT_URI;
                 }
+            case "RECORDINGS":
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    return MediaStore.Audio.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY);
+                } else {
+                    return MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -313,6 +319,8 @@ public class Media {
                 return "Movies/";
             case "DOCUMENTS":
                 return "Download/";
+            case "RECORDINGS":
+                return "Recordings/";
         }
 
         return "Download/";

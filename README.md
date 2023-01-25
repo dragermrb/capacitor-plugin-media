@@ -26,6 +26,7 @@ npx cap sync
 * [`saveVideo(...)`](#savevideo)
 * [`saveGif(...)`](#savegif)
 * [`saveDocument(...)`](#savedocument)
+* [`saveAudio(...)`](#saveaudio)
 * [`createAlbum(...)`](#createalbum)
 * [Interfaces](#interfaces)
 * [Enums](#enums)
@@ -123,6 +124,23 @@ saveDocument(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
 ```
 
 Add document to gallery. Android only. Create album if not exists.
+
+| Param         | Type                                                          |
+| ------------- | ------------------------------------------------------------- |
+| **`options`** | <code><a href="#mediasaveoptions">MediaSaveOptions</a></code> |
+
+**Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
+
+--------------------
+
+
+### saveAudio(...)
+
+```typescript
+saveAudio(options?: MediaSaveOptions | undefined) => Promise<MediaResponse>
+```
+
+Add audio to gallery. Android only. Creates album if not exists.
 
 | Param         | Type                                                          |
 | ------------- | ------------------------------------------------------------- |

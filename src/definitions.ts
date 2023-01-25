@@ -30,6 +30,11 @@ export interface MediaPlugin {
   saveDocument(options?: MediaSaveOptions): Promise<MediaResponse>;
 
   /**
+   * Add audio to gallery. Android only. Creates album if not exists.
+   */
+  saveAudio(options?: MediaSaveOptions): Promise<MediaResponse>;
+
+  /**
    * Create album. IOS only
    */
   createAlbum(options: MediaAlbumCreate): Promise<MediaAlbum>;

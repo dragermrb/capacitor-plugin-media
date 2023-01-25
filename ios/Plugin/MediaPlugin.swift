@@ -218,6 +218,14 @@ public class MediaPlugin: CAPPlugin {
         })
     }
     
+    @objc func saveDocument(_ call: CAPPluginCall) {
+        call.unimplemented("Not implemented on iOS.")
+    }
+    
+    @objc func saveAudio(_ call: CAPPluginCall) {
+        call.unimplemented("Not implemented on iOS.")
+    }
+    
     
     func checkAuthorization(allowed: @escaping () -> Void, notAllowed: @escaping () -> Void) {
         let status = PHPhotoLibrary.authorizationStatus()
@@ -598,5 +606,5 @@ extension URL {
         }
         return UTTypeConformsTo(uti, kUTTypeMovie) || UTTypeConformsTo(uti, kUTTypeVideo)
     }
-
+    
 }

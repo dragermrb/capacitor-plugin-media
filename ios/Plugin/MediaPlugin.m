@@ -10,4 +10,6 @@ CAP_PLUGIN(MediaPlugin, "Media",
     CAP_PLUGIN_METHOD(savePhoto, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(saveVideo, CAPPluginReturnPromise);
     CAP_PLUGIN_METHOD(saveGif, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(saveDocument, CAPPluginReturnPromise);
+    CAP_PLUGIN_METHOD(saveAudio, CAPPluginReturnPromise);
 )
