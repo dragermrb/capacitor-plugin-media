@@ -86,7 +86,7 @@ public class MediaPlugin extends Plugin {
     @PluginMethod
     public void saveAudio(PluginCall call) {
         if (isStoragePermissionGranted()) {
-            _saveMedia(call, "RECORDINGS");
+            _saveMedia(call, "MUSIC");
         } else {
             requestPermissionForAlias("publicStorage", call, "permissionCallback");
         }
@@ -118,7 +118,7 @@ public class MediaPlugin extends Plugin {
                 _saveMedia(call, "DOCUMENTS");
                 break;
             case "saveAudio":
-                _saveMedia(call, "RECORDINGS");
+                _saveMedia(call, "MUSIC");
                 break;
             case "createAlbum":
                 _createAlbum(call);
