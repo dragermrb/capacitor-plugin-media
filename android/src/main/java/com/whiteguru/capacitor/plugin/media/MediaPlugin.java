@@ -2,7 +2,6 @@ package com.whiteguru.capacitor.plugin.media;
 
 import android.Manifest;
 import android.os.Build;
-
 import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Logger;
@@ -17,13 +16,37 @@ import com.getcapacitor.annotation.PermissionCallback;
 @CapacitorPlugin(
     name = "Media",
     permissions = {
+        /*
+        SDK VERSIONS 30-32
+        This alias is a placeholder and the PHOTOS alias will be updated to use this permission
+        so that the end user does not need to explicitly use separate aliases depending
+        on the SDK version.
+         */
         @Permission(
             strings = { Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE },
-            alias = "publicStorage"
+            alias = MediaPlugin.PUBLIC_STORAGE
+        ),
+        /*
+        SDK VERSIONS 33 AND ABOVE
+        This alias is a placeholder and the PHOTOS alias will be updated to use these permissions
+        so that the end user does not need to explicitly use separate aliases depending
+        on the SDK version.
+         */
+        @Permission(
+            strings = { Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_AUDIO, Manifest.permission.READ_MEDIA_VIDEO },
+            alias = MediaPlugin.MEDIA_STORAGE
         )
     }
 )
 public class MediaPlugin extends Plugin {
+
+    // Permission alias constants
+    static final String PUBLIC_STORAGE = "publicStorage";
+    static final String MEDIA_STORAGE = "mediaStorage";
+
+    private static final String STORAGE_PERMISSION = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+        ? MEDIA_STORAGE
+        : PUBLIC_STORAGE;
 
     private final Media implementation = new Media();
 
@@ -37,7 +60,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _getAlbums(call);
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -52,7 +75,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "PICTURES");
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -61,7 +84,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "MOVIES");
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -70,7 +93,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "PICTURES");
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -79,7 +102,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "DOCUMENTS");
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -88,7 +111,7 @@ public class MediaPlugin extends Plugin {
         if (isStoragePermissionGranted()) {
             _saveMedia(call, "MUSIC");
         } else {
-            requestPermissionForAlias("publicStorage", call, "permissionCallback");
+            requestPermissionForAlias(STORAGE_PERMISSION, call, "permissionCallback");
         }
     }
 
@@ -127,7 +150,7 @@ public class MediaPlugin extends Plugin {
     }
 
     private boolean isStoragePermissionGranted() {
-        return getPermissionState("publicStorage") == PermissionState.GRANTED;
+        return getPermissionState(STORAGE_PERMISSION) == PermissionState.GRANTED;
     }
 
     private void _getAlbums(PluginCall call) {
