@@ -2,10 +2,17 @@
 
 Capacitor plugin to handle media files
 
-## Install
+## Install (Capacitor 6.x)
 
 ```bash
 npm install @whiteguru/capacitor-plugin-media
+npx cap sync
+```
+
+### or for Capacitor 5.x
+
+```bash
+npm install @whiteguru/capacitor-plugin-media@^5.0.2
 npx cap sync
 ```
 
