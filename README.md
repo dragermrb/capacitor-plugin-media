@@ -12,7 +12,7 @@ npx cap sync
 ## Install (Capacitor 6.x)
 
 ```bash
-npm install @whiteguru/capacitor-plugin-media@^5.0.2
+npm install @whiteguru/capacitor-plugin-media@^6.0.2
 npx cap sync
 ```
 
@@ -55,16 +55,16 @@ Read about [Setting Permissions](https://capacitorjs.com/docs/android/configurat
 
 <docgen-index>
 
-* [`getMedias(...)`](#getmedias)
-* [`getAlbums()`](#getalbums)
-* [`savePhoto(...)`](#savephoto)
-* [`saveVideo(...)`](#savevideo)
-* [`saveGif(...)`](#savegif)
-* [`saveDocument(...)`](#savedocument)
-* [`saveAudio(...)`](#saveaudio)
-* [`createAlbum(...)`](#createalbum)
-* [Interfaces](#interfaces)
-* [Enums](#enums)
+- [`getMedias(...)`](#getmedias)
+- [`getAlbums()`](#getalbums)
+- [`savePhoto(...)`](#savephoto)
+- [`saveVideo(...)`](#savevideo)
+- [`saveGif(...)`](#savegif)
+- [`saveDocument(...)`](#savedocument)
+- [`saveAudio(...)`](#saveaudio)
+- [`createAlbum(...)`](#createalbum)
+- [Interfaces](#interfaces)
+- [Enums](#enums)
 
 </docgen-index>
 
@@ -85,8 +85,7 @@ Get list of user medias. IOS only
 
 **Returns:** <code>Promise&lt;<a href="#mediasresponse">MediasResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### getAlbums()
 
@@ -98,8 +97,7 @@ Get list of user albums. IOS and Android Api 29+
 
 **Returns:** <code>Promise&lt;<a href="#mediaalbumresponse">MediaAlbumResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### savePhoto(...)
 
@@ -115,8 +113,7 @@ Add image to gallery. Creates album if not exists.
 
 **Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### saveVideo(...)
 
@@ -132,8 +129,7 @@ Add video to gallery. Creates album if not exists.
 
 **Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### saveGif(...)
 
@@ -149,8 +145,7 @@ Add gif to gallery. Creates album if not exists.
 
 **Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### saveDocument(...)
 
@@ -166,8 +161,7 @@ Add document to gallery. Android only. Create album if not exists.
 
 **Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### saveAudio(...)
 
@@ -183,8 +177,7 @@ Add audio to gallery. Android only. Creates album if not exists.
 
 **Returns:** <code>Promise&lt;<a href="#mediaresponse">MediaResponse</a>&gt;</code>
 
---------------------
-
+---
 
 ### createAlbum(...)
 
@@ -200,18 +193,15 @@ Create album. IOS only
 
 **Returns:** <code>Promise&lt;<a href="#mediaalbum">MediaAlbum</a>&gt;</code>
 
---------------------
-
+---
 
 ### Interfaces
-
 
 #### MediasResponse
 
 | Prop         | Type                      |
 | ------------ | ------------------------- |
 | **`medias`** | <code>MediaAsset[]</code> |
-
 
 #### MediaAsset
 
@@ -226,7 +216,6 @@ Create album. IOS only
 | **`thumbnailHeight`** | <code>number</code>                                     | Height of thumbnail preview                                             |
 | **`location`**        | <code><a href="#medialocation">MediaLocation</a></code> | Location metadata for the asset                                         |
 
-
 #### MediaLocation
 
 | Prop            | Type                | Description                              |
@@ -236,7 +225,6 @@ Create album. IOS only
 | **`heading`**   | <code>number</code> | Heading of user at time image was taken  |
 | **`altitude`**  | <code>number</code> | Altitude of user at time image was taken |
 | **`speed`**     | <code>number</code> | Speed of user at time image was taken    |
-
 
 #### MediaFetchOptions
 
@@ -249,13 +237,11 @@ Create album. IOS only
 | **`types`**            | <code>string</code> | Which types of assets to return (currently only supports "photos")    |
 | **`albumIdentifier`**  | <code>string</code> | Which album identifier to query in (get identifier with getAlbums())  |
 
-
 #### MediaAlbumResponse
 
 | Prop         | Type                      | Description                                   |
 | ------------ | ------------------------- | --------------------------------------------- |
 | **`albums`** | <code>MediaAlbum[]</code> | Array of <a href="#mediaalbum">MediaAlbum</a> |
-
 
 #### MediaAlbum
 
@@ -265,14 +251,12 @@ Create album. IOS only
 | **`name`**       | <code>string</code>                                       | Album name                         |
 | **`type`**       | <code><a href="#mediaalbumtype">MediaAlbumType</a></code> | Album type                         |
 
-
 #### MediaResponse
 
 | Prop       | Type                | Description |
 | ---------- | ------------------- | ----------- |
 | **`path`** | <code>string</code> | Media path  |
 | **`name`** | <code>string</code> | Media name  |
-
 
 #### MediaSaveOptions
 
@@ -281,16 +265,13 @@ Create album. IOS only
 | **`path`**  | <code>string</code>                          | Path of file to add                                                                 |
 | **`album`** | <code>{ id?: string; name?: string; }</code> | Album to add media. If no 'id' and 'name' not exists, album 'name' will be created. |
 
-
 #### MediaAlbumCreate
 
 | Prop       | Type                | Description |
 | ---------- | ------------------- | ----------- |
 | **`name`** | <code>string</code> | Album name  |
 
-
 ### Enums
-
 
 #### MediaAlbumType
 
