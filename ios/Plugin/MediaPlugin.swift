@@ -28,46 +28,6 @@ public class MediaPlugin: CAPPlugin {
     // Must be lazy here because it will prompt for permissions on instantiation without it
     lazy var imageManager = PHCachingImageManager()
     
-    @objc func getAlbums(_ call: CAPPluginCall) {
-        checkAuthorization(allowed: {
-            self.fetchAlbumsToJs(call)
-        }, notAllowed: {
-            call.reject("Access to photos not allowed by user")
-        })
-    }
-    
-    @objc func getMedias(_ call: CAPPluginCall) {
-        checkAuthorization(allowed: {
-            self.fetchResultAssetsToJs(call)
-        }, notAllowed: {
-            call.reject("Access to photos not allowed by user")
-        })
-    }
-    
-    @objc func createAlbum(_ call: CAPPluginCall) {
-        guard let name = call.getString("name") else {
-            call.reject("Must provide a name")
-            return
-        }
-        
-        checkAuthorization(allowed: {
-            self.createAlbumByName(name) { phAsset in
-                if phAsset == nil {
-                    call.reject("Unable to create album")
-                    return
-                } else {
-                    call.resolve([
-                        "identifier": phAsset?.localIdentifier as Any,
-                        "name": phAsset?.localizedTitle as Any,
-                    ])
-                    return
-                }
-            }
-        }, notAllowed: {
-            call.reject("Access to photos not allowed by user")
-        })
-    }
-    
     @objc func savePhoto(_ call: CAPPluginCall) {
         guard let path = call.getString("path") else {
             call.reject("Must provide the data path")

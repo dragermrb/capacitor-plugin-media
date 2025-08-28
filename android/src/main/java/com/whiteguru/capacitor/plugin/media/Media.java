@@ -13,7 +13,6 @@ import android.webkit.MimeTypeMap;
 
 import androidx.annotation.NonNull;
 
-import com.getcapacitor.JSArray;
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Logger;
 
@@ -26,45 +25,12 @@ import java.nio.channels.FileChannel;
 import java.text.Normalizer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Locale;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 public class Media {
 
     private static final String LOG_TAG = "Capacitor/MediaPlugin";
-
-    public JSArray getAlbums(Context context) throws RuntimeException {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
-            throw new RuntimeException("getAlbums() requires API 29+");
-        }
-
-        JSArray albums = new JSArray();
-        Set<String> bucketIds = new HashSet<>();
-
-        String[] projection = new String[] { MediaStore.MediaColumns.BUCKET_DISPLAY_NAME, MediaStore.MediaColumns.BUCKET_ID };
-        Cursor cur = context.getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, null, null, null);
-
-        while (cur.moveToNext()) {
-            String albumName = cur.getString((cur.getColumnIndexOrThrow(MediaStore.MediaColumns.BUCKET_DISPLAY_NAME)));
-            String bucketId = cur.getString((cur.getColumnIndexOrThrow(MediaStore.MediaColumns.BUCKET_ID)));
-
-            if (!bucketIds.contains(bucketId)) {
-                JSObject album = new JSObject();
-
-                album.put("identifier", bucketId);
-                album.put("name", albumName);
-                albums.put(album);
-
-                bucketIds.add(bucketId);
-            }
-        }
-
-        cur.close();
-
-        return albums;
-    }
 
     public JSObject saveMedia(@NonNull Context context, String inputPath, String albumName, String destination) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && destination.equals("DOCUMENTS")) {
@@ -227,10 +193,6 @@ public class Media {
         }
 
         return fileName;
-    }
-
-    public String createAlbum(String albumName) throws RuntimeException {
-        throw new RuntimeException("Not available on Android");
     }
 
     private void copyContent(ContentResolver resolver, String inputPath, Uri outputUri) throws RuntimeException {
