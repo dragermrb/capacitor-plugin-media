@@ -10,7 +10,7 @@
     "@capacitor/core": ">=8.0.0"
   },
   "unpkg": "dist/plugin.js",
-  "version": "8.0.0",
+  "version": "8.0.1",
   "repository": {
     "url": "git+https://github.com/dragermrb/capacitor-plugin-media.git",
     "type": "git"
