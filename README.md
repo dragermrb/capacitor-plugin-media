@@ -2,6 +2,13 @@
 
 Capacitor plugin to handle media files
 
+## Install (Capacitor 8.x)
+
+```bash
+npm install @whiteguru/capacitor-plugin-media
+npx cap sync
+```
+
 ## Breaking Changes
 
 Since version 7.0.2 the following methods have been removed:
@@ -13,7 +20,7 @@ Since version 7.0.2 the following methods have been removed:
 ## Install (Capacitor 7.x)
 
 ```bash
-npm install @whiteguru/capacitor-plugin-media
+npm install @whiteguru/capacitor-plugin-media@^7.0.2
 npx cap sync
 ```
 
