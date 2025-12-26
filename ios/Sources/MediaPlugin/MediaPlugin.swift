@@ -16,7 +16,16 @@ public class JSDate {
  * here: https://capacitorjs.com/docs/plugins/ios
  */
 @objc(MediaPlugin)
-public class MediaPlugin: CAPPlugin {
+public class MediaPlugin: CAPPlugin, CAPBridgedPlugin {
+    public let identifier = "MediaPlugin"
+    public let jsName = "Media"
+    public let pluginMethods: [CAPPluginMethod] = [
+        CAPPluginMethod(name: "savePhoto", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "saveVideo", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "saveGif", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "saveDocument", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "saveAudio", returnType: CAPPluginReturnPromise),
+    ]
     private let implementation = Media()
     
     typealias JSObject = [String:Any]
