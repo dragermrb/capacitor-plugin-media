@@ -1,38 +1,38 @@
 {
-  "keywords" : [
+  "keywords": [
     "capacitor",
     "plugin",
     "native"
   ],
-  "prettier" : "@ionic/prettier-config",
-  "swiftlint" : "@ionic/swiftlint-config",
-  "peerDependencies" : {
-    "@capacitor/core" : ">=7.0.0"
+  "prettier": "@ionic/prettier-config",
+  "swiftlint": "@ionic/swiftlint-config",
+  "peerDependencies": {
+    "@capacitor/core": ">=8.0.0"
   },
-  "unpkg" : "dist/plugin.js",
-  "version" : "7.1.0",
-  "repository" : {
-    "url" : "git+https://github.com/dragermrb/capacitor-plugin-media.git",
-    "type" : "git"
+  "unpkg": "dist/plugin.js",
+  "version": "8.0.0",
+  "repository": {
+    "url": "git+https://github.com/dragermrb/capacitor-plugin-media.git",
+    "type": "git"
   },
-  "module" : "dist/esm/index.js",
-  "license" : "MIT",
-  "description" : "Capacitor plugin to handle media files",
-  "bugs" : {
-    "url" : "https://github.com/dragermrb/capacitor-plugin-media/issues"
+  "module": "dist/esm/index.js",
+  "license": "MIT",
+  "description": "Capacitor plugin to handle media files",
+  "bugs": {
+    "url": "https://github.com/dragermrb/capacitor-plugin-media/issues"
   },
-  "main" : "dist/plugin.cjs.js",
-  "capacitor" : {
-    "android" : {
-      "src" : "android"
+  "main": "dist/plugin.cjs.js",
+  "capacitor": {
+    "android": {
+      "src": "android"
     },
-    "ios" : {
-      "src" : "ios"
+    "ios": {
+      "src": "ios"
     }
   },
-  "name" : "@whiteguru/capacitor-plugin-media",
-  "author" : "Manuel Rodríguez",
-  "files" : [
+  "name": "@whiteguru/capacitor-plugin-media",
+  "author": "Manuel Rodríguez",
+  "files": [
     "android/src/main/",
     "android/build.gradle",
     "dist/",
@@ -41,43 +41,43 @@
     "ios/Tests",
     "Package.swift"
   ],
-  "engines" : {
-    "node" : ">=16"
+  "engines": {
+    "node": ">=16"
   },
-  "scripts" : {
-    "watch" : "tsc --watch",
-    "clean" : "rimraf ./dist",
-    "build" : "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
-    "docgen" : "docgen --api MediaPlugin --output-readme README.md --output-json dist/docs.json",
-    "fmt" : "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
-    "lint" : "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
-    "prepublishOnly" : "npm run build",
-    "prettier" : "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
-    "verify:web" : "npm run build",
-    "verify" : "npm run verify:ios && npm run verify:android && npm run verify:web",
-    "swiftlint" : "node-swiftlint",
-    "verify:ios" : "xcodebuild -scheme WhiteguruCapacitorPluginMedia -destination generic/platform=iOS",
-    "eslint" : "eslint . --ext ts",
-    "verify:android" : "cd android && ./gradlew clean build test && cd .."
+  "scripts": {
+    "watch": "tsc --watch",
+    "clean": "rimraf ./dist",
+    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.mjs",
+    "docgen": "docgen --api MediaPlugin --output-readme README.md --output-json dist/docs.json",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+    "prepublishOnly": "npm run build",
+    "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
+    "verify:web": "npm run build",
+    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "swiftlint": "node-swiftlint",
+    "verify:ios": "xcodebuild -scheme WhiteguruCapacitorPluginMedia -destination generic/platform=iOS",
+    "eslint": "eslint . --ext ts",
+    "verify:android": "cd android && ./gradlew clean build test && cd .."
   },
-  "eslintConfig" : {
-    "extends" : "@ionic/eslint-config/recommended"
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
   },
-  "devDependencies" : {
-    "rimraf" : "^6.0.1",
-    "@ionic/prettier-config" : "^4.0.0",
-    "@capacitor/core" : "^7.0.0",
-    "@ionic/swiftlint-config" : "^2.0.0",
-    "@capacitor/android" : "^7.0.0",
-    "@capacitor/docgen" : "^0.3.0",
-    "typescript" : "~4.1.5",
-    "@capacitor/ios" : "^7.0.0",
-    "prettier" : "^3.4.2",
-    "@ionic/eslint-config" : "^0.4.0",
-    "swiftlint" : "^2.0.0",
-    "eslint" : "^8.57.0",
-    "rollup" : "^4.30.1",
-    "prettier-plugin-java" : "^2.6.6"
+  "devDependencies": {
+    "rimraf": "^6.1.0",
+    "@ionic/prettier-config": "^4.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@ionic/swiftlint-config": "^2.0.0",
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/docgen": "^0.3.1",
+    "typescript": "^5.9.3",
+    "@capacitor/ios": "^8.0.0",
+    "prettier": "^3.6.2",
+    "@ionic/eslint-config": "^0.4.0",
+    "swiftlint": "^2.0.0",
+    "eslint": "^8.57.1",
+    "rollup": "^4.53.2",
+    "prettier-plugin-java": "^2.7.7"
   },
-  "types" : "dist/esm/index.d.ts"
+  "types": "dist/esm/index.d.ts"
 }
